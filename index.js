@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const axios = require('axios')
 const app = express()
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
@@ -139,6 +140,7 @@ let data = [
     "Suki Type G4",
     "The World",
     "Star Platinum",
+    "Pak Slapur"
 ]
 
 app.get('/', async (req, res) => {
@@ -147,8 +149,22 @@ app.get('/', async (req, res) => {
 
 app.post('/search-kodam', async (req, res) => {
     const name = req.body.name;
+    const hewanUrl = 'https://raw.githubusercontent.com/ItsBayyyy/database/main/bahan-kodam/hewan.json';
+    const kabupatenUrl = 'https://raw.githubusercontent.com/ItsBayyyy/database/main/bahan-kodam/kabupaten.json';
+    const hewanData = await axios.get(hewanUrl);
+    const kabupatenData = await axios.get(kabupatenUrl);
+    const hewan = hewanData.data.hewan
+    const kabupaten = kabupatenData.data.kabupaten
+    const randomHewan = hewan[Math.floor(Math.random() * hewan.length)];
+    const randomKabupaten = kabupaten[Math.floor(Math.random() * kabupaten.length)];
     const hasil = data[Math.floor(Math.random() * data.length)];
-    res.redirect(`/hasil?name=${name}&hasil=${hasil}`);
+    const hasil2 = await `${randomHewan} ${randomKabupaten}.`;
+    let hasil3 = [
+        hasil,
+        hasil2
+    ]
+    const hasil4 = hasil3[Math.floor(Math.random() * hasil3.length)]
+    res.redirect(`/hasil?name=${name}&hasil=${hasil4}`);
 });
 
 app.get('/hasil', (req, res) => {
