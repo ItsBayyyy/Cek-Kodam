@@ -146,10 +146,15 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/search-kodam', async (req, res) => {
-    const name = req.body.name
-    const hasil = data[Math.floor(Math.random() * data.length)]
-    res.render('hasil', {name, hasil})
-})
+    const name = req.body.name;
+    const hasil = data[Math.floor(Math.random() * data.length)];
+    res.redirect(`/hasil?name=${name}&hasil=${hasil}`);
+});
+
+app.get('/hasil', (req, res) => {
+    const { name, hasil } = req.query;
+    res.render('hasil', { name, hasil });
+});
 
 app.listen('8080', (req, res) => {
     console.log('Ready!')
