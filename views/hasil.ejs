@@ -20,6 +20,11 @@
                 opacity: 1;
             }
         }
+        #hasilContainer {
+            max-width: 90vw;
+            margin: 0 auto; 
+            overflow-wrap: break-word; 
+        }
     </style>
 </head>
 <body class="bg-gray-100 h-screen flex items-center justify-center">
@@ -39,7 +44,10 @@
             <br>
             <p class="text-sm mb-5">Ini hanyalah game untuk seru-seruan semata. Jangan lupa share yahh...</p>
             <div class="flex justify-center space-x-4">
-                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm md:text-base lg:text-lg hover:bg-blue-600" onclick="location.reload()">Ulangi</button>
+                <form action="/search-kodam" method="post">
+                    <input type="hidden" name="name" value="<%= name %>">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm md:text-base lg:text-lg hover:bg-blue-600">Ulangi</button>
+                </form>
                 <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm md:text-base lg:text-lg hover:bg-green-600" onclick="masukkannama()">Masukkan Nama</button>
                 <button class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm md:text-base lg:text-lg hover:bg-gray-600" onclick="shareResult()">Share</button>
             </div>
