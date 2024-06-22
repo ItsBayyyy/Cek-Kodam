@@ -143,6 +143,11 @@ let data = [
     "Pak Slapur"
 ]
 
+let spasi = [
+    ' ',
+    ' asli '
+]
+
 app.get('/', async (req, res) => {
     res.render('index')
 })
@@ -158,7 +163,8 @@ app.post('/search-kodam', async (req, res) => {
     const randomHewan = hewan[Math.floor(Math.random() * hewan.length)];
     const randomKabupaten = kabupaten[Math.floor(Math.random() * kabupaten.length)];
     const hasil = data[Math.floor(Math.random() * data.length)];
-    const hasil2 = await `${randomHewan} ${randomKabupaten}.`;
+    const asli = spasi[Math.floor(Math.random() * spasi.length)]
+    const hasil2 = await `${randomHewan}${asli}${randomKabupaten}.`;
     let hasil3 = [
         hasil,
         hasil2
